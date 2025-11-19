@@ -34,6 +34,17 @@ public class Recipe {
   @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL, orphanRemoval = true)
   private Set<Recipe_Ingredient> ingredients = new HashSet<>();
 
+  @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL, orphanRemoval = true)
+  private Set<Review> reviews = new HashSet<>();
+
+  public Set<Review> getReviews() {
+    return reviews;
+  }
+
+  public void setReviews(Set<Review> reviews) {
+    this.reviews = reviews;
+  }
+
   public Long getRecipe_id() {
     return recipe_id;
   }
