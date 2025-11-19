@@ -1,6 +1,8 @@
 package com.andres.SpringREST_restaurante.entities;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 import com.andres.SpringREST_restaurante.entities.VO.Inventory;
 
@@ -12,6 +14,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -33,6 +38,18 @@ public class Ingredient {
 
   @Column(name = "last_update", nullable = false)
   private LocalDate lastUpdate;
+
+  @ManyToMany
+  @JoinTable(name = "ingredients_providers", joinColumns = @JoinColumn(name = "ingredient_id"), inverseJoinColumns = @JoinColumn(name = "provider_id"))
+  private Set<Provider> providers = new HashSet<>();
+
+  public Set<Provider> getProviders() {
+    return providers;
+  }
+
+  public void setProviders(Set<Provider> providers) {
+    this.providers = providers;
+  }
 
   public Long getIngredient_id() {
     return ingredient_id;
