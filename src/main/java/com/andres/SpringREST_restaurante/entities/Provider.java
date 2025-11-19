@@ -3,6 +3,7 @@ package com.andres.SpringREST_restaurante.entities;
 import java.util.HashSet;
 import java.util.Set;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,7 +21,7 @@ public class Provider {
   @Column(nullable = false, length = 100)
   private String name;
 
-  @ManyToMany(mappedBy = "providers")
+  @ManyToMany(mappedBy = "providers", cascade = CascadeType.ALL)
   private Set<Ingredient> ingredientes = new HashSet<>();
 
   public Long getProvider_id() {

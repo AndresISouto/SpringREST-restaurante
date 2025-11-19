@@ -8,6 +8,7 @@ import com.andres.SpringREST_restaurante.entities.VO.Inventory;
 
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.AttributeOverrides;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
@@ -17,6 +18,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -42,6 +44,9 @@ public class Ingredient {
   @ManyToMany
   @JoinTable(name = "ingredients_providers", joinColumns = @JoinColumn(name = "ingredient_id"), inverseJoinColumns = @JoinColumn(name = "provider_id"))
   private Set<Provider> providers = new HashSet<>();
+
+  @OneToMany(mappedBy = "ingredient", cascade = CascadeType.ALL, orphanRemoval = true)
+  private Set<Recipe_Ingredient> recipes = new HashSet<>();
 
   public Set<Provider> getProviders() {
     return providers;
