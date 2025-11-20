@@ -53,4 +53,15 @@ public class Review {
     this.body = body;
   }
 
+  public Review(Long review_id, String body, Recipe recipe) {
+    this.review_id = review_id;
+    this.body = body;
+    this.recipe = recipe;
+  }
+
+  public Review(String body, Recipe recipe) {
+    this.body = body;
+    this.recipe = recipe;
+  }
+
 }

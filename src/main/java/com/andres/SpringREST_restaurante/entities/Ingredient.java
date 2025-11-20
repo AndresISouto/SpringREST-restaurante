@@ -91,4 +91,32 @@ public class Ingredient {
   public Ingredient() {
   }
 
+  public Ingredient(Long ingredient_id, String name, Inventory inventory, LocalDate lastUpdate, Set<Provider> providers,
+      Set<Recipe_Ingredient> recipes) {
+    this.ingredient_id = ingredient_id;
+    this.name = name;
+    this.inventory = inventory;
+    this.lastUpdate = lastUpdate;
+    this.providers = providers;
+    this.recipes = recipes;
+  }
+
+  public Ingredient(String name, Inventory inventory, LocalDate lastUpdate) {
+    this.name = name;
+    this.inventory = inventory;
+    this.lastUpdate = lastUpdate;
+  }
+
+  public Set<Recipe_Ingredient> getRecipes() {
+    return recipes;
+  }
+
+  public void setRecipes(Set<Recipe_Ingredient> recipes) {
+    this.recipes = recipes;
+  }
+
+  public void addProvider(Provider provider) {
+    this.providers.add(provider);
+  }
+
 }

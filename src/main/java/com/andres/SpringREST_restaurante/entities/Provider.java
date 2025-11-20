@@ -28,6 +28,17 @@ public class Provider {
     return provider_id;
   }
 
+  public Provider(String name, Set<Ingredient> ingredientes) {
+    this.name = name;
+    this.ingredientes = ingredientes;
+  }
+
+  public Provider(Long provider_id, String name, Set<Ingredient> ingredientes) {
+    this.provider_id = provider_id;
+    this.name = name;
+    this.ingredientes = ingredientes;
+  }
+
   public void setProvider_id(Long provider_id) {
     this.provider_id = provider_id;
   }

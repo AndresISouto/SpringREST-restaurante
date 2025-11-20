@@ -69,4 +69,19 @@ public class Recipe_Ingredient {
   public Recipe_Ingredient() {
   }
 
+  public Recipe_Ingredient(Long recipe_ingredient_id, Recipe recipe, Ingredient ingredient, Integer amount, Unit unit) {
+    this.recipe_ingredient_id = recipe_ingredient_id;
+    this.recipe = recipe;
+    this.ingredient = ingredient;
+    this.amount = amount;
+    this.unit = unit;
+  }
+
+  public Recipe_Ingredient(Recipe recipe, Ingredient ingredient, Integer amount, Unit unit) {
+    this.recipe = recipe;
+    this.ingredient = ingredient;
+    this.amount = amount;
+    this.unit = unit;
+  }
+
 }

@@ -99,4 +99,41 @@ public class Recipe {
   public Recipe() {
   }
 
+  public Recipe(Long recipe_id, String name, Integer portions, String steps, Double precioCoste, Double precioVenta,
+      Set<Recipe_Ingredient> ingredients, Set<Review> reviews, Set<Sale_Recipe> sales) {
+    this.recipe_id = recipe_id;
+    this.name = name;
+    this.portions = portions;
+    this.steps = steps;
+    this.precioCoste = precioCoste;
+    this.precioVenta = precioVenta;
+    this.ingredients = ingredients;
+    this.reviews = reviews;
+    this.sales = sales;
+  }
+
+  public Recipe(String name, Integer portions, String steps, Double precioCoste, Double precioVenta) {
+    this.name = name;
+    this.portions = portions;
+    this.steps = steps;
+    this.precioCoste = precioCoste;
+    this.precioVenta = precioVenta;
+  }
+
+  public Set<Recipe_Ingredient> getIngredients() {
+    return ingredients;
+  }
+
+  public void setIngredients(Set<Recipe_Ingredient> ingredients) {
+    this.ingredients = ingredients;
+  }
+
+  public Set<Sale_Recipe> getSales() {
+    return sales;
+  }
+
+  public void setSales(Set<Sale_Recipe> sales) {
+    this.sales = sales;
+  }
+
 }

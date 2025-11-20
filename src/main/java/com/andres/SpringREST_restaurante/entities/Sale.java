@@ -74,4 +74,18 @@ public class Sale {
   public Sale() {
   }
 
+  public Sale(Long sale_id, LocalDate emmisionDate, State state, Double amount, Set<Sale_Recipe> recipes) {
+    this.sale_id = sale_id;
+    this.emmisionDate = emmisionDate;
+    this.state = state;
+    this.amount = amount;
+    this.recipes = recipes;
+  }
+
+  public Sale(LocalDate emmisionDate, State state, Double amount) {
+    this.emmisionDate = emmisionDate;
+    this.state = state;
+    this.amount = amount;
+  }
+
 }
