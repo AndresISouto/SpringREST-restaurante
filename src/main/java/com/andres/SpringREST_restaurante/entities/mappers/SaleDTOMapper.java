@@ -12,6 +12,7 @@ import com.andres.SpringREST_restaurante.entities.DTO.SaleDTO;
 @Mapper(componentModel = "spring")
 public interface SaleDTOMapper {
 
+  @Mapping(target = "recipes", source = "recipes")
   SaleDTO toDto(Sale sale);
 
   @Mapping(target = "name", source = "recipe.name")

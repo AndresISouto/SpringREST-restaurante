@@ -5,11 +5,13 @@ import org.mapstruct.Mapping;
 
 import com.andres.SpringREST_restaurante.entities.Recipe;
 import com.andres.SpringREST_restaurante.entities.Recipe_Ingredient;
-import com.andres.SpringREST_restaurante.entities.DTO.IngredientDTO;
+import com.andres.SpringREST_restaurante.entities.DTO.IngredientResponseDTO;
+import com.andres.SpringREST_restaurante.entities.DTO.RecipeRequestDTO;
 import com.andres.SpringREST_restaurante.entities.DTO.RecipeResponseDTO;
+import com.andres.SpringREST_restaurante.entities.DTO.RecipeUpdateDTO;
 
 @Mapper(componentModel = "spring")
-public interface RecipeResponseDTOMapper {
+public interface RecipeMapper {
 
   // 1. Main mapping: Recipe -> RecipeResponseDTO
   // MapStruct automatically detects the Set -> List conversion for 'ingredients'
@@ -21,6 +23,11 @@ public interface RecipeResponseDTOMapper {
   @Mapping(target = "name", source = "ingredient.name") // Jump from Link -> Ingredient -> Name
   @Mapping(target = "amount", source = "amount") // Directly from Link
   @Mapping(target = "unit", source = "unit") // Directly from Link (Enums map to String auto)
-  IngredientDTO toIngredientDto(Recipe_Ingredient recipeIngredient);
+  IngredientResponseDTO toIngredientDto(Recipe_Ingredient recipeIngredient);
 
+  @Mapping(target = "ingredients", ignore = true)
+  Recipe toEntity(RecipeRequestDTO dto);
+
+  @Mapping(target = "ingredients", ignore = true)
+  Recipe toEntity(RecipeUpdateDTO dto);
 }
