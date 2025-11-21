@@ -18,10 +18,10 @@ public interface IsaleService {
 
   SaleDTO create();
 
-  RecipeResponseDTO addRecipeById(Long Id);
+  RecipeResponseDTO addRecipeById(Long saleId, Long recipeId);
 
-  RecipeResponseDTO removeRecipeById(Long Id);
+  RecipeResponseDTO removeRecipeById(Long saleId, Long recipeId);
 
-  Double calculateAmount();
+  Double calculateAmount(Long id);
 
 }
