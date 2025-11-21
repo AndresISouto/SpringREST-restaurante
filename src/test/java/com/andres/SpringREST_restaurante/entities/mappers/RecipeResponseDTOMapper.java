@@ -9,6 +9,7 @@ import com.andres.SpringREST_restaurante.Enums.Unit;
 import com.andres.SpringREST_restaurante.entities.Ingredient;
 import com.andres.SpringREST_restaurante.entities.Recipe;
 import com.andres.SpringREST_restaurante.entities.Recipe_Ingredient;
+import com.andres.SpringREST_restaurante.entities.DTO.IngredientResponseDTO;
 import com.andres.SpringREST_restaurante.entities.DTO.RecipeResponseDTO;
 
 import java.util.Set;
@@ -16,10 +17,10 @@ import java.util.Set;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
-class RecipeResponseDTOMapperTest {
+class RecipeMapperTest {
 
   @Autowired // <--- Standard Spring Injection
-  private RecipeResponseDTOMapper mapper;
+  private RecipeMapper mapper;
 
   @Test
   void shouldMapRecipeToDto_AndFlattenIngredients() {
@@ -64,7 +65,7 @@ class RecipeResponseDTOMapperTest {
     // CRITICAL: Check the "Flattening"
     // (Did it get 'Potato' from the Ingredient table and '5.0' from the Link
     // table?)
-    var ingredientDto = result.ingredients().get(0);
+    IngredientResponseDTO ingredientDto = result.ingredients().get(0);
 
     assertThat(ingredientDto.name()).isEqualTo("Potato"); // Comes from Ingredient Entity
     assertThat(ingredientDto.amount()).isEqualTo(5); // Comes from Link Entity
