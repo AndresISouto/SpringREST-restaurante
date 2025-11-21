@@ -8,5 +8,5 @@ public record RecipeResponseDTO(
     String steps,
     Double precioCoste,
     Double precioVenta,
-    List<IngredientDTO> ingredients) {
+    List<IngredientResponseDTO> ingredients) {
 }

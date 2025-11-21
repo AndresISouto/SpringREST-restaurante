@@ -2,8 +2,10 @@ package com.andres.SpringREST_restaurante.entities.DTO;
 
 import com.andres.SpringREST_restaurante.Enums.Unit;
 
-public record IngredientBasicDTO(
+public record IngredientResponseDTO(
     Long ingredient_id,
+    String name,
     Integer amount,
-    Unit unit) {
+    Unit unit,
+    Double pricePerUnit) {
 }
