@@ -5,7 +5,7 @@ import com.andres.SpringREST_restaurante.Enums.Unit;
 public record IngredientUpdateDTO(
     Long ingredient_id,
     String name,
-    Integer amount,
+    Double amount,
     Unit unit,
     Double pricePerUnit) {
 }
