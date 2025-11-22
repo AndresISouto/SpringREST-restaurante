@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.andres.SpringREST_restaurante.entities.DTO.RecipeRequestDTO;
 import com.andres.SpringREST_restaurante.entities.DTO.RecipeResponseDTO;
 import com.andres.SpringREST_restaurante.entities.DTO.RecipeUpdateDTO;
+import com.andres.SpringREST_restaurante.entities.DTO.ReviewDTO;
 
 @Service
 public interface IrecipeService {
@@ -21,4 +22,5 @@ public interface IrecipeService {
 
   RecipeResponseDTO update(RecipeUpdateDTO dto);
 
+  List<ReviewDTO> getReviewsById(Long id);
 }

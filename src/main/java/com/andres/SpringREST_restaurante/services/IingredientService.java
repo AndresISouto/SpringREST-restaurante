@@ -1,6 +1,7 @@
 package com.andres.SpringREST_restaurante.services;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.stereotype.Service;
 
@@ -23,5 +24,9 @@ public interface IingredientService {
 
   IngredientResponseDTO update(IngredientUpdateDTO dto);
 
-  ProviderDTO getProvidersById(Long id);
+  Set<ProviderDTO> getProvidersById(Long id);
+
+  ProviderDTO addProvider(Long ingredient_id, Long provider_id);
+
+  void removeProvider(Long ingredient_id, Long provider_id);
 }
