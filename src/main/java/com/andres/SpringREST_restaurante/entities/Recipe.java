@@ -136,4 +136,9 @@ public class Recipe {
     this.sales = sales;
   }
 
+  public void addRecipeIngredient(Recipe_Ingredient recipeIngredient) {
+    ingredients.add(recipeIngredient);
+    recipeIngredient.setRecipe(this);
+  }
+
 }
