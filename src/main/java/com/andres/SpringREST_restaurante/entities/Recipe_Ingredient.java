@@ -23,7 +23,7 @@ public class Recipe_Ingredient {
   @JoinColumn(name = "ingredient_id", nullable = false)
   private Ingredient ingredient;
 
-  private Integer amount;
+  private Double amount;
   private Unit unit;
 
   public Long getRecipe_ingredient_id() {
@@ -50,11 +50,11 @@ public class Recipe_Ingredient {
     this.ingredient = ingredient;
   }
 
-  public Integer getAmount() {
+  public Double getAmount() {
     return amount;
   }
 
-  public void setAmount(Integer amount) {
+  public void setAmount(Double amount) {
     this.amount = amount;
   }
 
@@ -69,7 +69,7 @@ public class Recipe_Ingredient {
   public Recipe_Ingredient() {
   }
 
-  public Recipe_Ingredient(Long recipe_ingredient_id, Recipe recipe, Ingredient ingredient, Integer amount, Unit unit) {
+  public Recipe_Ingredient(Long recipe_ingredient_id, Recipe recipe, Ingredient ingredient, Double amount, Unit unit) {
     this.recipe_ingredient_id = recipe_ingredient_id;
     this.recipe = recipe;
     this.ingredient = ingredient;
@@ -77,7 +77,7 @@ public class Recipe_Ingredient {
     this.unit = unit;
   }
 
-  public Recipe_Ingredient(Recipe recipe, Ingredient ingredient, Integer amount, Unit unit) {
+  public Recipe_Ingredient(Recipe recipe, Ingredient ingredient, Double amount, Unit unit) {
     this.recipe = recipe;
     this.ingredient = ingredient;
     this.amount = amount;
