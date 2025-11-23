@@ -6,19 +6,20 @@ import org.springframework.stereotype.Service;
 
 import com.andres.SpringREST_restaurante.entities.Provider;
 import com.andres.SpringREST_restaurante.entities.DTO.ProviderDTO;
+import com.andres.SpringREST_restaurante.entities.DTO.ProviderResponseDTO;
 
 @Service
 public interface IproviderService {
 
-  ProviderDTO getById(Long id);
+  ProviderResponseDTO getById(Long id);
 
-  List<ProviderDTO> getAll();
+  List<ProviderResponseDTO> getAll();
 
   Provider getEntityById(Long id);
 
-  ProviderDTO create(ProviderDTO dto);
+  ProviderResponseDTO create(ProviderDTO dto);
 
-  ProviderDTO update(ProviderDTO dto);
+  ProviderResponseDTO update(ProviderResponseDTO dto);
 
   void deleteById(Long id);
 }
