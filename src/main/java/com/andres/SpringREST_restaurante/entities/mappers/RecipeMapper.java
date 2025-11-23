@@ -26,8 +26,15 @@ public interface RecipeMapper {
   IngredientResponseDTO toIngredientDto(Recipe_Ingredient recipeIngredient);
 
   @Mapping(target = "ingredients", ignore = true)
+  @Mapping(target = "recipe_id", ignore = true)
+  @Mapping(target = "precioCoste", ignore = true)
+  @Mapping(target = "reviews", ignore = true)
+  @Mapping(target = "sales", ignore = true)
   Recipe toEntity(RecipeRequestDTO dto);
 
   @Mapping(target = "ingredients", ignore = true)
+  @Mapping(target = "precioCoste", ignore = true)
+  @Mapping(target = "reviews", ignore = true)
+  @Mapping(target = "sales", ignore = true)
   Recipe toEntity(RecipeUpdateDTO dto);
 }

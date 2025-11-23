@@ -24,7 +24,6 @@ public interface IngredientDTOMapper {
   Ingredient toEntity(IngredientRequestDTO dto);
 
   @Mapping(target = "inventory", expression = "java(new Inventory(dto.amount(),dto.unit(),dto.pricePerUnit()))")
-  @Mapping(target = "ingredient_id", source = "ingredient_id")
   @Mapping(target = "lastUpdate", ignore = true)
   @Mapping(target = "providers", ignore = true)
   @Mapping(target = "recipes", ignore = true)
