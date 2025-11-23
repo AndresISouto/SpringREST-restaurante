@@ -22,21 +22,21 @@ public class Provider {
   private String name;
 
   @ManyToMany(mappedBy = "providers", cascade = CascadeType.ALL)
-  private Set<Ingredient> ingredientes = new HashSet<>();
+  private Set<Ingredient> ingredients = new HashSet<>();
 
   public Long getProvider_id() {
     return provider_id;
   }
 
-  public Provider(String name, Set<Ingredient> ingredientes) {
+  public Provider(String name, Set<Ingredient> ingredients) {
     this.name = name;
-    this.ingredientes = ingredientes;
+    this.ingredients = ingredients;
   }
 
   public Provider(Long provider_id, String name, Set<Ingredient> ingredientes) {
     this.provider_id = provider_id;
     this.name = name;
-    this.ingredientes = ingredientes;
+    this.ingredients = ingredientes;
   }
 
   public void setProvider_id(Long provider_id) {
@@ -51,12 +51,12 @@ public class Provider {
     this.name = name;
   }
 
-  public Set<Ingredient> getIngredientes() {
-    return ingredientes;
+  public Set<Ingredient> getIngredients() {
+    return ingredients;
   }
 
-  public void setIngredientes(Set<Ingredient> ingredientes) {
-    this.ingredientes = ingredientes;
+  public void setIngredients(Set<Ingredient> ingredientes) {
+    this.ingredients = ingredientes;
   }
 
   public Provider() {
