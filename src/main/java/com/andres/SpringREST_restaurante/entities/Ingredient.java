@@ -115,8 +115,13 @@ public class Ingredient {
     this.recipes = recipes;
   }
 
-  public void addProvider(Provider provider) {
-    this.providers.add(provider);
+  public void removeProvider(Provider provider) {
+    this.providers.remove(provider);
+    provider.getIngredients().remove(this);
   }
 
+  public void addProvider(Provider provider) {
+    providers.add(provider);
+    provider.getIngredients().add(this);
+  }
 }
