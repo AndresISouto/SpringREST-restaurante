@@ -43,7 +43,7 @@ class RecipeMapperTest {
     Recipe_Ingredient link = new Recipe_Ingredient();
     link.setRecipe(recipe); // Link back to recipe
     link.setIngredient(potato); // Link to ingredient
-    link.setAmount(5);
+    link.setAmount(5.0);
     link.setUnit(Unit.Kg); // Assuming your Enum is named Unit
 
     // Add the link to the Recipe's Set
