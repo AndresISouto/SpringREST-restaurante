@@ -5,5 +5,5 @@ import com.andres.SpringREST_restaurante.Enums.Unit;
 public record RecipeIngredientDTO(
     Long ingredient_id,
     Unit unit,
-    Integer amount) {
+    Double amount) {
 }
