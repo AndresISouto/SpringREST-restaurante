@@ -2,11 +2,12 @@ package com.andres.SpringREST_restaurante.services;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
+import java.util.NoSuchElementException;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.andres.SpringREST_restaurante.entities.Ingredient;
 import com.andres.SpringREST_restaurante.entities.Provider;
@@ -14,24 +15,28 @@ import com.andres.SpringREST_restaurante.entities.DTO.IngredientRequestDTO;
 import com.andres.SpringREST_restaurante.entities.DTO.IngredientResponseDTO;
 import com.andres.SpringREST_restaurante.entities.DTO.IngredientUpdateDTO;
 import com.andres.SpringREST_restaurante.entities.DTO.ProviderDTO;
+import com.andres.SpringREST_restaurante.entities.DTO.ProviderResponseDTO;
 import com.andres.SpringREST_restaurante.entities.mappers.IngredientDTOMapper;
 import com.andres.SpringREST_restaurante.entities.mappers.ProviderDTOMapper;
 import com.andres.SpringREST_restaurante.repositories.IngredientRepository;
 
 @Service
+@Transactional(readOnly = true)
 public class IngredientServiceImp implements IingredientService {
 
   private final IngredientRepository ingredientRepository;
   private final IngredientDTOMapper mapper;
   private final ProviderDTOMapper providerMapper;
   private final ProviderServiceImp providerServiceImp;
+  private final IrecipeService recipeService;
 
   public IngredientServiceImp(IngredientRepository ingredientRepository, IngredientDTOMapper mapper,
-      ProviderDTOMapper providerMapper, ProviderServiceImp providerServiceImp) {
+      ProviderDTOMapper providerMapper, ProviderServiceImp providerServiceImp, IrecipeService recipeService) {
     this.ingredientRepository = ingredientRepository;
     this.mapper = mapper;
     this.providerMapper = providerMapper;
     this.providerServiceImp = providerServiceImp;
+    this.recipeService = recipeService;
   }
 
   @Override
@@ -54,11 +59,13 @@ public class IngredientServiceImp implements IingredientService {
   }
 
   @Override
+  @Transactional
   public void deleteById(Long id) {
     ingredientRepository.deleteById(id);
   }
 
   @Override
+  @Transactional
   public IngredientResponseDTO create(IngredientRequestDTO dto) {
     Ingredient ingredient = mapper.toEntity(dto);
     ingredient.setLastUpdate(LocalDate.now());
@@ -72,11 +79,14 @@ public class IngredientServiceImp implements IingredientService {
   }
 
   @Override
+  @Transactional
   public IngredientResponseDTO update(IngredientUpdateDTO dto) {
     Ingredient ingredient = mapper.toEntity(dto);
     ingredient.setLastUpdate(LocalDate.now());
 
     ingredientRepository.save(ingredient);
+
+    recipeService.setPriceWithIngredient(ingredient.getIngredient_id());
 
     IngredientResponseDTO response = mapper.toDto(ingredient);
 
@@ -85,12 +95,12 @@ public class IngredientServiceImp implements IingredientService {
   }
 
   @Override
-  public Set<ProviderDTO> getProvidersById(Long id) {
+  public Set<ProviderResponseDTO> getProvidersById(Long id) {
     Ingredient ingredient = ingredientRepository.findById(id)
         .orElseThrow(() -> new IllegalArgumentException("id does not exist"));
 
     Set<Provider> providers = ingredient.getProviders();
-    Set<ProviderDTO> response = providers.stream()
+    Set<ProviderResponseDTO> response = providers.stream()
         .map(provider -> providerMapper.toDto(provider))
         .collect(Collectors.toSet());
 
@@ -98,24 +108,40 @@ public class IngredientServiceImp implements IingredientService {
   }
 
   @Override
-  public ProviderDTO addProvider(Long ingredient_id, Long provider_id) {
+  @Transactional
+  public ProviderResponseDTO addProvider(Long ingredient_id, Long provider_id) {
     Ingredient ingredient = ingredientRepository.findById(ingredient_id)
         .orElseThrow(() -> new IllegalArgumentException("id does not exist"));
 
     Provider provider = providerServiceImp.getEntityById(provider_id);
-    ingredient.getProviders().add(provider);
+    ingredient.addProvider(provider);
+
     ingredientRepository.save(ingredient);
 
-    ProviderDTO response = providerMapper.toDto(provider);
+    ProviderResponseDTO response = providerMapper.toDto(provider);
 
     return response;
 
   }
 
   @Override
+  @Transactional
   public void removeProvider(Long ingredient_id, Long provider_id) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'removeProvider'");
+    Ingredient ingredient = ingredientRepository.findById(ingredient_id)
+        .orElseThrow(() -> new IllegalArgumentException("id does not exist"));
+
+    Provider provider = providerServiceImp.getEntityById(provider_id);
+    ingredient.removeProvider(provider);
+
+    ingredientRepository.save(ingredient);
+
+  }
+
+  @Override
+  public Ingredient getEntityById(Long id) {
+    Ingredient ingredient = ingredientRepository.findById(id)
+        .orElseThrow(() -> new NoSuchElementException("Ingredient id does not exist"));
+    return ingredient;
   }
 
 }
