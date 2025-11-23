@@ -1,15 +1,20 @@
 package com.andres.SpringREST_restaurante.services;
 
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.andres.SpringREST_restaurante.entities.Provider;
 import com.andres.SpringREST_restaurante.entities.DTO.ProviderDTO;
+import com.andres.SpringREST_restaurante.entities.DTO.ProviderResponseDTO;
 import com.andres.SpringREST_restaurante.entities.mappers.ProviderDTOMapper;
 import com.andres.SpringREST_restaurante.repositories.ProviderRepository;
 
 @Service
+@Transactional(readOnly = true)
 public class ProviderServiceImp implements IproviderService {
 
   private final ProviderRepository providerRepository;
@@ -21,15 +26,23 @@ public class ProviderServiceImp implements IproviderService {
   }
 
   @Override
-  public ProviderDTO getById(Long id) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'getById'");
+  public ProviderResponseDTO getById(Long id) {
+    Provider provider = providerRepository.findById(id)
+        .orElseThrow(() -> new NoSuchElementException("id does not exist"));
+
+    ProviderResponseDTO response = mapper.toDto(provider);
+
+    return response;
   }
 
   @Override
-  public List<ProviderDTO> getAll() {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'getAll'");
+  public List<ProviderResponseDTO> getAll() {
+    List<Provider> providers = providerRepository.findAll();
+    List<ProviderResponseDTO> response = providers.stream()
+        .map(provider -> mapper.toDto(provider))
+        .collect(Collectors.toList());
+
+    return response;
   }
 
   @Override
@@ -40,21 +53,25 @@ public class ProviderServiceImp implements IproviderService {
   }
 
   @Override
-  public ProviderDTO create(ProviderDTO dto) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'create'");
+  public ProviderResponseDTO create(ProviderDTO dto) {
+    Provider provider = mapper.toEntity(dto);
+    providerRepository.save(provider);
+    ProviderResponseDTO response = mapper.toDto(provider);
+
+    return response;
   }
 
   @Override
-  public ProviderDTO update(ProviderDTO dto) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'update'");
+  public ProviderResponseDTO update(ProviderResponseDTO dto) {
+    Provider provider = mapper.toEntity(dto);
+    providerRepository.save(provider);
+
+    return dto;
   }
 
   @Override
   public void deleteById(Long id) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'deleteById'");
+    providerRepository.deleteById(id);
   }
 
 }
