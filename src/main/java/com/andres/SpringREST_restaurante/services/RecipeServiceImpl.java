@@ -33,14 +33,16 @@ public class RecipeServiceImpl implements IrecipeService {
   private final IingredientService ingredientService;
   private final IngredientDTOMapper ingredientMapper;
   private final ReviewDTOMapper reviewMapper;
+  private final PrecioService precioService;
 
   public RecipeServiceImpl(RecipeRepository recipeRepository, RecipeMapper mapper, IingredientService ingredientService,
-      IngredientDTOMapper ingredientMapper, ReviewDTOMapper reviewMapper) {
+      IngredientDTOMapper ingredientMapper, ReviewDTOMapper reviewMapper, PrecioService precioService) {
     this.recipeRepository = recipeRepository;
     this.mapper = mapper;
     this.ingredientService = ingredientService;
     this.ingredientMapper = ingredientMapper;
     this.reviewMapper = reviewMapper;
+    this.precioService = precioService;
   }
 
   @Override
@@ -60,6 +62,12 @@ public class RecipeServiceImpl implements IrecipeService {
     RecipeResponseDTO response = mapper.toDto(recipe);
 
     return response;
+  }
+
+  public Recipe getEntityById(Long id) {
+    Recipe recipe = recipeRepository.findById(id).orElseThrow(() -> new NoSuchElementException("id not found"));
+
+    return recipe;
   }
 
   @Override
@@ -83,7 +91,7 @@ public class RecipeServiceImpl implements IrecipeService {
       recipe.addRecipeIngredient(recipeIngredient);
     }
 
-    Double price = calculatePrice(recipeIngredients);
+    Double price = precioService.calculatePrice(recipeIngredients);
     recipe.setPrecioCoste(price);
     recipe.setPrecioVenta(price * 1.3);
 
@@ -147,7 +155,6 @@ public class RecipeServiceImpl implements IrecipeService {
     return response;
   }
 
-  @Override
   public Double calculatePrice(Long id) {
     Recipe recipe = recipeRepository.findByIdWithIngredients(id)
         .orElseThrow(() -> new NoSuchElementException("Recipe not found"));
@@ -161,46 +168,6 @@ public class RecipeServiceImpl implements IrecipeService {
     }
     return price;
 
-  }
-
-  @Override
-  public void setPrice(Long id) {
-    Recipe recipe = recipeRepository.findByIdWithIngredients(id)
-        .orElseThrow(() -> new NoSuchElementException("Recipe not found"));
-
-    Double price = 0.0;
-
-    for (Recipe_Ingredient ri : recipe.getIngredients()) {
-      Ingredient ingredient = ri.getIngredient();
-
-      price += ri.getAmount() * ingredient.getInventory().getAmount();
-    }
-    recipe.setPrecioCoste(price);
-    recipe.setPrecioVenta(price * 1.3);
-
-    recipeRepository.save(recipe);
-
-  }
-
-  public void setPriceWithIngredient(Long id) {
-    List<Recipe> recipes = recipeRepository.findByIngredientId(id)
-        .orElseThrow(() -> new NoSuchElementException("Recipe not found"));
-
-    for (Recipe recipe : recipes) {
-      setPrice(recipe.getRecipe_id());
-    }
-
-  }
-
-  public Double calculatePrice(Set<Recipe_Ingredient> ri) {
-    Double price = 0.0;
-
-    for (Recipe_Ingredient item : ri) {
-      Ingredient ingredient = item.getIngredient();
-
-      price += item.getAmount() * ingredient.getInventory().getAmount();
-    }
-    return price;
   }
 
 }

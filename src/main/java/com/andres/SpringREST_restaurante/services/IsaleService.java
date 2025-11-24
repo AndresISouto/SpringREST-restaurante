@@ -5,22 +5,23 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.andres.SpringREST_restaurante.entities.DTO.RecipeResponseDTO;
-import com.andres.SpringREST_restaurante.entities.DTO.SaleDTO;
+import com.andres.SpringREST_restaurante.entities.DTO.SaleRequestDTO;
+import com.andres.SpringREST_restaurante.entities.DTO.SaleResponseDTO;
 
 @Service
 public interface IsaleService {
 
-  List<SaleDTO> getAll();
+  List<SaleResponseDTO> getAll();
 
-  SaleDTO getById(Long id);
+  SaleResponseDTO getById(Long id);
 
   void deleteById(Long id);
 
-  SaleDTO create();
+  SaleResponseDTO create(SaleRequestDTO dto);
 
   RecipeResponseDTO addRecipeById(Long saleId, Long recipeId);
 
-  RecipeResponseDTO removeRecipeById(Long saleId, Long recipeId);
+  void removeRecipeById(Long saleId, Long recipeId);
 
   Double calculateAmount(Long id);
 

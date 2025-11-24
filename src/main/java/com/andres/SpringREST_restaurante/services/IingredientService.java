@@ -9,7 +9,6 @@ import com.andres.SpringREST_restaurante.entities.Ingredient;
 import com.andres.SpringREST_restaurante.entities.DTO.IngredientRequestDTO;
 import com.andres.SpringREST_restaurante.entities.DTO.IngredientResponseDTO;
 import com.andres.SpringREST_restaurante.entities.DTO.IngredientUpdateDTO;
-import com.andres.SpringREST_restaurante.entities.DTO.ProviderDTO;
 import com.andres.SpringREST_restaurante.entities.DTO.ProviderResponseDTO;
 
 @Service

@@ -14,7 +14,6 @@ import com.andres.SpringREST_restaurante.entities.Provider;
 import com.andres.SpringREST_restaurante.entities.DTO.IngredientRequestDTO;
 import com.andres.SpringREST_restaurante.entities.DTO.IngredientResponseDTO;
 import com.andres.SpringREST_restaurante.entities.DTO.IngredientUpdateDTO;
-import com.andres.SpringREST_restaurante.entities.DTO.ProviderDTO;
 import com.andres.SpringREST_restaurante.entities.DTO.ProviderResponseDTO;
 import com.andres.SpringREST_restaurante.entities.mappers.IngredientDTOMapper;
 import com.andres.SpringREST_restaurante.entities.mappers.ProviderDTOMapper;
@@ -28,15 +27,16 @@ public class IngredientServiceImp implements IingredientService {
   private final IngredientDTOMapper mapper;
   private final ProviderDTOMapper providerMapper;
   private final ProviderServiceImp providerServiceImp;
-  private final IrecipeService recipeService;
+  private final PrecioService precioService;
 
   public IngredientServiceImp(IngredientRepository ingredientRepository, IngredientDTOMapper mapper,
-      ProviderDTOMapper providerMapper, ProviderServiceImp providerServiceImp, IrecipeService recipeService) {
+      ProviderDTOMapper providerMapper, ProviderServiceImp providerServiceImp,
+      PrecioService priceService) {
     this.ingredientRepository = ingredientRepository;
     this.mapper = mapper;
     this.providerMapper = providerMapper;
     this.providerServiceImp = providerServiceImp;
-    this.recipeService = recipeService;
+    this.precioService = priceService;
   }
 
   @Override
@@ -86,7 +86,7 @@ public class IngredientServiceImp implements IingredientService {
 
     ingredientRepository.save(ingredient);
 
-    recipeService.setPriceWithIngredient(ingredient.getIngredient_id());
+    precioService.setPriceWithIngredient(ingredient.getIngredient_id());
 
     IngredientResponseDTO response = mapper.toDto(ingredient);
 
