@@ -26,9 +26,9 @@ public class Recipe {
   @Lob
   @Column(nullable = false)
   private String steps;
-  @Column(nullable = false)
+  @Column(name = "precio_coste", nullable = false)
   private Double precioCoste;
-  @Column(nullable = false)
+  @Column(name = "precio_venta", nullable = false)
   private Double precioVenta;
 
   @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL, orphanRemoval = true)

@@ -28,9 +28,9 @@ public class Provider {
     return provider_id;
   }
 
-  public Provider(String name, Set<Ingredient> ingredients) {
+  public Provider(String name, Set<Ingredient> ingredientes) {
     this.name = name;
-    this.ingredients = ingredients;
+    this.ingredients = ingredientes;
   }
 
   public Provider(Long provider_id, String name, Set<Ingredient> ingredientes) {

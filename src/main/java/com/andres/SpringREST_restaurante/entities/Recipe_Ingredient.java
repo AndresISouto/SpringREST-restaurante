@@ -3,6 +3,8 @@ package com.andres.SpringREST_restaurante.entities;
 import com.andres.SpringREST_restaurante.Enums.Unit;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -21,9 +23,10 @@ public class Recipe_Ingredient {
   private Recipe recipe;
   @ManyToOne
   @JoinColumn(name = "ingredient_id", nullable = false)
-  private Ingredient ingredient;
 
+  private Ingredient ingredient;
   private Double amount;
+  @Enumerated(EnumType.STRING)
   private Unit unit;
 
   public Long getRecipe_ingredient_id() {

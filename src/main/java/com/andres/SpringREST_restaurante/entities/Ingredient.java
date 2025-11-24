@@ -34,7 +34,7 @@ public class Ingredient {
   @AttributeOverrides({
       @AttributeOverride(name = "amount", column = @Column(name = "amount", scale = 2)),
       @AttributeOverride(name = "unit", column = @Column(name = "unit")),
-      @AttributeOverride(name = "price_per_unit", column = @Column(name = "pricePerUnit"))
+      @AttributeOverride(name = "pricePerUnit", column = @Column(name = "price_per_unit"))
   })
   private Inventory inventory;
 
