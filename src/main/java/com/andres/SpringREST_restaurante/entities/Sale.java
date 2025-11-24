@@ -88,4 +88,13 @@ public class Sale {
     this.amount = amount;
   }
 
+  public void addRecipe(Sale_Recipe sr) {
+    recipes.add(sr);
+    sr.setSale(this);
+  }
+
+  public void removeRecipe(Sale_Recipe sr) {
+    recipes.remove(sr);
+    sr = null;
+  }
 }
