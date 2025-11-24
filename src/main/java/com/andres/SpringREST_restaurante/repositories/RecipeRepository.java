@@ -22,10 +22,10 @@ public interface RecipeRepository extends JpaRepository<Recipe, Long> {
       "LEFT JOIN FETCH r.ingredients ri " + // Fetch Recipe_Ingredient
       "LEFT JOIN FETCH ri.ingredient i " + // Fetch Ingredient
       "WHERE i.ingredient_id = :ingredientId")
-  Optional<List<Recipe>> findByIngredientId(@Param("ingedientId") Long ingredientId);
+  List<Recipe> findByIngredientId(@Param("ingredientId") Long ingredientId);
 
-  @Query("SELECT r FROM Recipe r" +
-      "LEFT JOIN FETCH r.reviews rs" +
+  @Query("SELECT r FROM Recipe r " +
+      "LEFT JOIN FETCH r.reviews rs " +
       "WHERE r.recipe_id = :recipeId")
   Optional<Recipe> findByIdWithReviews(@Param("recipeId") Long recipeId);
 }
