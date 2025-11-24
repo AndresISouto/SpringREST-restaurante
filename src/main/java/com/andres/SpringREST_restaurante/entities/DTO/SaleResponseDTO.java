@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.andres.SpringREST_restaurante.Enums.State;
 
-public record SaleDTO(
+public record SaleResponseDTO(
     LocalDate emmisionDate,
     State state,
     Double amount,
