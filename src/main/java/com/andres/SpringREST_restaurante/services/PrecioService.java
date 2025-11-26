@@ -7,6 +7,7 @@ import java.util.Set;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.andres.SpringREST_restaurante.Enums.Unit;
 import com.andres.SpringREST_restaurante.entities.Ingredient;
 import com.andres.SpringREST_restaurante.entities.Recipe;
 import com.andres.SpringREST_restaurante.entities.Recipe_Ingredient;
@@ -43,7 +44,9 @@ public class PrecioService implements IPrecioService {
     for (Recipe_Ingredient ri : recipe.getIngredients()) {
       Ingredient ingredient = ri.getIngredient();
 
-      price += ri.getAmount() * ingredient.getInventory().getAmount();
+      // price += ri.getAmount() * ingredient.getInventory().getAmount();
+      price += Unit.convert(ri.getUnit(), ri.getAmount())
+          * Unit.convert(ingredient.getInventory().getUnit(), ingredient.getInventory().getAmount());
     }
     recipe.setPrecioCoste(price);
     recipe.setPrecioVenta(price * 1.3);
@@ -58,7 +61,9 @@ public class PrecioService implements IPrecioService {
     for (Recipe_Ingredient ri : recipe.getIngredients()) {
       Ingredient ingredient = ri.getIngredient();
 
-      price += ri.getAmount() * ingredient.getInventory().getAmount();
+      // price += ri.getAmount() * ingredient.getInventory().getAmount();
+      price += Unit.convert(ri.getUnit(), ri.getAmount())
+          * Unit.convert(ingredient.getInventory().getUnit(), ingredient.getInventory().getAmount());
     }
     recipe.setPrecioCoste(price);
     recipe.setPrecioVenta(price * 1.3);
@@ -73,7 +78,9 @@ public class PrecioService implements IPrecioService {
     for (Recipe_Ingredient item : ri) {
       Ingredient ingredient = item.getIngredient();
 
-      price += item.getAmount() * ingredient.getInventory().getAmount();
+      // price += item.getAmount() * ingredient.getInventory().getAmount();
+      price += Unit.convert(item.getUnit(), item.getAmount())
+          * Unit.convert(ingredient.getInventory().getUnit(), ingredient.getInventory().getAmount());
     }
     return price;
   }
