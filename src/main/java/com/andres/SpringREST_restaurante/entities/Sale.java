@@ -9,6 +9,8 @@ import com.andres.SpringREST_restaurante.Enums.State;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -24,6 +26,7 @@ public class Sale {
   @Column(name = "emmision_date", nullable = false)
   private LocalDate emmisionDate;
   @Column(nullable = false)
+  @Enumerated(EnumType.STRING)
   private State state;
   @Column(nullable = false)
   private Double amount;
