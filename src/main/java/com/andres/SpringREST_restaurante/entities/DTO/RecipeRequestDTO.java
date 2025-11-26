@@ -13,6 +13,5 @@ public record RecipeRequestDTO(
     @NotBlank String name,
     @NotNull @Positive Integer portions,
     @NotBlank String steps,
-    @NotNull @Positive Double precioVenta,
     @NotEmpty @Valid List<RecipeIngredientDTO> ingredients) {
 }
