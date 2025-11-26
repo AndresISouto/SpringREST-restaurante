@@ -1,6 +1,9 @@
 package com.andres.SpringREST_restaurante.entities.DTO;
 
+import io.micrometer.common.lang.NonNull;
+import jakarta.validation.constraints.Positive;
+
 public record RecipeSaleDTO(
-    Long recipe_id,
-    Integer amount) {
+    @NonNull @Positive Long recipe_id,
+    @NonNull @Positive Integer amount) {
 }
