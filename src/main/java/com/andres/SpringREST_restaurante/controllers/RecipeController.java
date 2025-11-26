@@ -37,7 +37,7 @@ public class RecipeController {
     return ResponseEntity.ok(recipes); // 200 OK
   }
 
-  @GetMapping("/vi/recipes/{id}")
+  @GetMapping("/v1/recipes/{id}")
   public ResponseEntity<RecipeResponseDTO> getById(@PathVariable Long id) {
     RecipeResponseDTO response = recipeService.getById(id);
     return ResponseEntity.ok(response);
