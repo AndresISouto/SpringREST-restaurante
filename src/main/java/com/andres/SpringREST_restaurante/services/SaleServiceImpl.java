@@ -85,7 +85,7 @@ public class SaleServiceImpl implements IsaleService {
     sale.addRecipe(sr);
     RecipeResponseDTO response = recipeMapper.toDto(recipe);
 
-    sale.setAmount(calculateAmount(saleId));
+    sale.setAmount(calculateAmountBySale(sale));
     saleRepository.save(sale);
 
     return response;
@@ -99,7 +99,7 @@ public class SaleServiceImpl implements IsaleService {
     Sale_Recipe sr = new Sale_Recipe(sale, recipe, 1);
     sale.removeRecipe(sr);
 
-    sale.setAmount(calculateAmount(saleId));
+    sale.setAmount(calculateAmountBySale(sale));
     saleRepository.save(sale);
 
   }
@@ -107,6 +107,20 @@ public class SaleServiceImpl implements IsaleService {
   @Override
   public Double calculateAmount(Long id) {
     Sale sale = saleRepository.findById(id).orElseThrow(() -> new NoSuchElementException("id does not exist"));
+    Double price = 0.0;
+
+    for (Sale_Recipe item : sale.getRecipes()) {
+      Recipe recipe = item.getRecipe();
+      price += recipe.getPrecioVenta();
+    }
+    sale.setAmount(price);
+
+    saleRepository.save(sale);
+
+    return price;
+  }
+
+  public Double calculateAmountBySale(Sale sale) {
     Double price = 0.0;
 
     for (Sale_Recipe item : sale.getRecipes()) {
