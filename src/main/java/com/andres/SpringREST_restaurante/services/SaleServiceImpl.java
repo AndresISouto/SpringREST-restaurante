@@ -120,4 +120,11 @@ public class SaleServiceImpl implements IsaleService {
     return price;
   }
 
+  public SaleResponseDTO paySale(Long id) {
+    Sale sale = saleRepository.findById(id).orElseThrow(() -> new NoSuchElementException("id not found"));
+    sale.setState(State.PAID);
+    saleRepository.save(sale);
+    SaleResponseDTO response = mapper.toDto(sale);
+    return response;
+  }
 }
