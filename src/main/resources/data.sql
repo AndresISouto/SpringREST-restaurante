@@ -133,3 +133,196 @@ INSERT INTO recipes_ingredients (recipe_id, ingredient_id, amount, unit) VALUES
 -- Recipe 20: House Salad
 (20, 8, 15.0, 'L'), -- Olive Oil
 (20, 14, 10.0, 'Kg'); -- Lemons (for vinaigrette)
+
+INSERT INTO providers (name) VALUES
+('Local Fresh Produce Market'),
+('National Dairy Supply Inc.'),
+('Gourmet Spice Imports Co.'),
+('Wholesale Meat & Poultry Distributors'),
+('Artisan Bakery Grains'),
+('Southwest Seafood & Fish'),
+('Specialty Oils & Vinegars'),
+('Frozen Foods Mega Supply'),
+('Beverage & Drink Corp.'),
+('Cleaning and Janitorial Supplies'),
+('Eco-Friendly Packaging Solutions'),
+('Italian Food Distributors (IFD)'),
+('Asian Cuisine Supply (ACS)'),
+('Regional Potato & Root Farmers'),
+('Sweeteners and Confectionery Co.'),
+('Canned & Dry Goods Wholesaler'),
+('Certified Organic Farms'),
+('Restaurant Equipment & Repair'),
+('Local Microbrewery'),
+('Coffee Bean & Tea Leaf Source');
+
+INSERT INTO reviews (recipe_id, body) VALUES
+-- Recipe 1: Classic Cheeseburger (ID 1)
+(1, 'The cheeseburger was absolutely classic and delicious! Patty was juicy and the bun was perfectly toasted. A solid menu item.'),
+-- Recipe 2: Margherita Pizza (ID 2)
+(2, 'The Margherita Pizza was decent, but the crust was a little too thin and crispy for my taste. Good fresh basil flavor though.'),
+-- Recipe 3: Spaghetti Bolognese (ID 3)
+(3, 'Excellent Bolognese! Rich, meaty sauce and perfectly cooked pasta. Great value for the price.'),
+-- Recipe 4: Chicken Caesar Salad (ID 4)
+(4, 'The Chicken Caesar Salad was fresh, but the dressing lacked zest. The chicken was cooked well, but overall, it was uninspired.'),
+-- Recipe 5: French Onion Soup (ID 5)
+(5, 'Authentic and comforting. The caramelized onions were sweet and the cheese crust was bubbly and gooey. Highly recommend the soup!'),
+-- Recipe 6: Tuna Sashimi (ID 6)
+(6, 'Exceptional quality tuna! Very fresh and well-cut. A bit pricey, but worth it for the quality.'),
+-- Recipe 7: Vegetable Curry (ID 7)
+(7, 'The Vegetable Curry had great spice and flavor depth, but the vegetables were slightly overcooked and mushy.'),
+-- Recipe 8: Grilled Steak Frites (ID 8)
+(8, 'The steak was cooked exactly medium-rare as requested, and the frites were crispy. A flawless dish.'),
+-- Recipe 9: Chocolate Lava Cake (ID 9)
+(9, 'Rich, gooey center! A perfect dessert. It was served hot with a side of vanilla ice cream, exactly as it should be.'),
+-- Recipe 10: Fish and Chips (ID 10)
+(10, 'The fish batter was light and crispy, not greasy at all. The chips were thick-cut and well-seasoned.'),
+-- Recipe 11: Beef Tacos (ID 11)
+(11, 'Good, quick tacos. The seasoning on the beef was a little mild for my liking, but the fresh salsa helped.'),
+-- Recipe 12: Penne alla Vodka (ID 12)
+(12, 'The Penne alla Vodka sauce was silky smooth and delicious. A satisfying and indulgent pasta dish.'),
+-- Recipe 13: Avocado Toast (ID 13)
+(13, 'Simple but effective. The bread was toasted nicely, and the avocado was fresh. Perfect light lunch.'),
+-- Recipe 14: Pad Thai (Chicken) (ID 14)
+(14, 'This Pad Thai was disappointing. It was too sweet and lacked the necessary tanginess. The noodles were also a bit sticky.'),
+-- Recipe 15: New York Cheesecake (ID 15)
+(15, 'Easily the best cheesecake in the city! Creamy, dense, and the crust was perfect. A massive portion.'),
+-- Recipe 16: Lentil Soup (ID 16)
+(16, 'A hearty and flavorful soup, great for a cold day. Excellent texture and fresh herbs.'),
+-- Recipe 17: Blackened Salmon (ID 17)
+(17, 'The salmon was cooked beautifully—flaky and moist. The blackening spice added a nice kick without being overpowering.'),
+-- Recipe 18: BBQ Pulled Pork Sandwich (ID 18)
+(18, 'The pulled pork was tender, but the BBQ sauce was too vinegary. The coleslaw was a good crunchy complement.'),
+-- Recipe 19: Gourmet Waffle (Dessert) (ID 19)
+(19, 'The waffle itself was good, but the berries seemed a little past their prime. Could be improved with fresher toppings.'),
+-- Recipe 20: House Salad (Side) (ID 20)
+(20, 'A simple, fresh side salad. Nothing fancy, but the vinaigrette was light and flavorful.');
+
+INSERT INTO sales (emmision_date, state, amount) VALUES
+-- Recent Sales (PAID)
+(CURRENT_DATE(), 'PAID', 45.75),
+(CURRENT_DATE(), 'PAID', 12.99),
+(CURRENT_DATE(), 'PAID', 78.50),
+(CURRENT_DATE(), 'PAID', 9.50),
+(CURRENT_DATE(), 'PAID', 105.25),
+(CURRENT_DATE(), 'PAID', 21.40),
+(CURRENT_DATE(), 'PAID', 33.60),
+(CURRENT_DATE(), 'PAID', 55.00),
+
+-- Sales from yesterday (PAID)
+(DATE_SUB(CURRENT_DATE(), INTERVAL 1 DAY), 'PAID', 67.80),
+(DATE_SUB(CURRENT_DATE(), INTERVAL 1 DAY), 'PAID', 18.99),
+(DATE_SUB(CURRENT_DATE(), INTERVAL 1 DAY), 'PAID', 92.15),
+(DATE_SUB(CURRENT_DATE(), INTERVAL 1 DAY), 'PAID', 11.20),
+
+-- Older Sales (PAID)
+(DATE_SUB(CURRENT_DATE(), INTERVAL 3 DAY), 'PAID', 40.00),
+(DATE_SUB(CURRENT_DATE(), INTERVAL 5 DAY), 'PAID', 75.30),
+(DATE_SUB(CURRENT_DATE(), INTERVAL 8 DAY), 'PAID', 29.99),
+
+-- Pending Sales (for open/unpaid orders)
+(CURRENT_DATE(), 'UNPAID', 50.50),
+(CURRENT_DATE(), 'UNPAID', 14.75),
+
+-- Canceled Sales
+(DATE_SUB(CURRENT_DATE(), INTERVAL 2 DAY), 'UNPAID', 80.00),
+(DATE_SUB(CURRENT_DATE(), INTERVAL 4 DAY), 'UNPAID', 22.00),
+(DATE_SUB(CURRENT_DATE(), INTERVAL 1 DAY), 'UNPAID', 30.25);
+
+INSERT INTO sales_recipes (sale_id, recipe_id, amount) VALUES
+-- Sale 1 (Total: 45.75) - Family Meal
+(1, 1, 4),    -- 4x Classic Cheeseburger
+(1, 4, 1),    -- 1x Chicken Caesar Salad
+(1, 9, 2),    -- 2x Chocolate Lava Cake
+
+-- Sale 2 (Total: 12.99) - Simple Order
+(2, 3, 1),    -- 1x Spaghetti Bolognese
+(2, 20, 1),   -- 1x House Salad
+
+-- Sale 3 (Total: 78.50) - Large Dinner
+(3, 8, 2),    -- 2x Grilled Steak Frites
+(3, 5, 2),    -- 2x French Onion Soup
+(3, 15, 0),   -- 0x New York Cheesecake (This recipe is portions=8, likely sold whole, so 0 amount for the slice recipe)
+
+-- Sale 4 (Total: 9.50) - Single Lunch Item
+(4, 3, 1),    -- 1x Spaghetti Bolognese
+
+-- Sale 5 (Total: 105.25) - Dessert and Mains
+(5, 15, 1),   -- 1x New York Cheesecake (sold whole, amount 1 unit)
+(5, 17, 3),   -- 3x Blackened Salmon
+
+-- Sale 6 (Total: 21.40) - Quick Order
+(6, 10, 1),   -- 1x Fish and Chips
+(6, 12, 1),   -- 1x Penne alla Vodka
+
+-- Sale 7 (Total: 33.60) - Tacos and Soup
+(7, 11, 2),   -- 2x Beef Tacos (Set of 3)
+(7, 16, 2),   -- 2x Lentil Soup
+
+-- Sale 8 (Total: 55.00) - Pizza and Extras
+(8, 2, 3),    -- 3x Margherita Pizza
+(8, 20, 2),   -- 2x House Salad
+
+-- Sale 9 (Total: 67.80) - Mains from yesterday
+(9, 14, 2),   -- 2x Pad Thai (Chicken)
+(9, 18, 2),   -- 2x BBQ Pulled Pork Sandwich
+
+-- Sale 10 (Total: 18.99) - Single Dessert
+(10, 19, 2),  -- 2x Gourmet Waffle (Dessert)
+
+-- Sale 11 (Total: 92.15) - High-Value Order
+(11, 6, 4),   -- 4x Tuna Sashimi
+
+-- Sale 12 (Total: 11.20) - Simple Item
+(12, 7, 1),   -- 1x Vegetable Curry
+
+-- Sale 13 (Total: 40.00) - Variety
+(13, 1, 2),   -- 2x Classic Cheeseburger
+(13, 12, 1),  -- 1x Penne alla Vodka
+(13, 4, 1),   -- 1x Chicken Caesar Salad
+
+-- Sale 14 (Total: 75.30) - Larger Order
+(14, 8, 1),   -- 1x Grilled Steak Frites
+(14, 17, 2),  -- 2x Blackened Salmon
+
+-- Sale 15 (Total: 29.99) - Mixed Order
+(15, 10, 1),  -- 1x Fish and Chips
+(15, 14, 1),  -- 1x Pad Thai (Chicken)
+
+-- Sale 16 (PENDING, Total: 50.50)
+(16, 3, 3),   -- 3x Spaghetti Bolognese
+(16, 13, 2),  -- 2x Avocado Toast
+
+-- Sale 17 (PENDING, Total: 14.75)
+(17, 18, 1),  -- 1x BBQ Pulled Pork Sandwich
+(17, 20, 2);  -- 2x House Salad
+
+INSERT INTO ingredients_providers (ingredient_id, provider_id) VALUES
+(1, 5),
+(1, 16),
+(2, 2),
+(3, 3),
+(3, 13),
+(4, 1),
+(4, 17),
+(5, 4),
+(6, 1),
+(7, 15),
+(8, 7),
+(9, 6),
+(10, 14),
+(11, 16),
+(12, 5),
+(13, 8),
+(14, 1),
+(15, 2),
+(16, 4),
+(16, 17),
+(17, 3),
+(18, 14),
+(19, 16),
+(20, 13),
+(18, 8),
+(10, 17),
+(15, 11),
+(13, 9);
