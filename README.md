@@ -1,4 +1,3 @@
 # SpringREST-restaurante
 
-- recuerda calcular precios
-- pillar todas las recetas con un igrediente y actualizar sus precios
+- mirar como validar la entrada de datos de recetas
