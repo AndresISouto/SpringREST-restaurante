@@ -84,6 +84,10 @@ public class RecipeServiceImpl implements IrecipeService {
 
       Ingredient ingredient = ingredientService.getEntityById(recipeIngredientDTO.ingredient_id());
 
+      if (ingredient.getInventory().getUnit().getCategory() != recipeIngredientDTO.unit().getCategory()) {
+        throw new IllegalArgumentException("units need to be of the same category");
+      }
+
       Recipe_Ingredient recipeIngredient = new Recipe_Ingredient(recipe, ingredient, recipeIngredientDTO.amount(),
           recipeIngredientDTO.unit());
 
@@ -110,6 +114,10 @@ public class RecipeServiceImpl implements IrecipeService {
     for (RecipeIngredientDTO recipeIngredientDTO : dto.ingredients()) {
 
       Ingredient ingredient = ingredientService.getEntityById(recipeIngredientDTO.ingredient_id());
+
+      if (ingredient.getInventory().getUnit().getCategory() != recipeIngredientDTO.unit().getCategory()) {
+        throw new IllegalArgumentException("units need to be of the same category");
+      }
 
       Recipe_Ingredient recipeIngredient = new Recipe_Ingredient(recipe, ingredient, recipeIngredientDTO.amount(),
           recipeIngredientDTO.unit());
