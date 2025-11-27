@@ -15,6 +15,14 @@ public enum Unit {
     this.conversionFactor = caonversionFactor;
   }
 
+  public UnitCategory getCategory() {
+    return category;
+  }
+
+  public Double getConversionFactor() {
+    return conversionFactor;
+  }
+
   public static double convert(Unit unit, double value) {
     if (value < 0) {
       throw new IllegalArgumentException("Value cannot be negative");
