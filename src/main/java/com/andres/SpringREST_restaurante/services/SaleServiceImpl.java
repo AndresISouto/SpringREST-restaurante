@@ -73,7 +73,7 @@ public class SaleServiceImpl implements IsaleService {
       sale.addRecipe(sr);
     }
 
-    sale.setAmount(price);
+    sale.setPrice(price);
 
     saleRepository.save(sale);
 
@@ -90,7 +90,7 @@ public class SaleServiceImpl implements IsaleService {
     sale.addRecipe(sr);
     RecipeResponseDTO response = recipeMapper.toDto(recipe);
 
-    sale.setAmount(calculateAmountBySale(sale));
+    sale.setPrice(calculateAmountBySale(sale));
     saleRepository.save(sale);
 
     return response;
@@ -104,7 +104,7 @@ public class SaleServiceImpl implements IsaleService {
     Sale_Recipe sr = new Sale_Recipe(sale, recipe, 1);
     sale.removeRecipe(sr);
 
-    sale.setAmount(calculateAmountBySale(sale));
+    sale.setPrice(calculateAmountBySale(sale));
     saleRepository.save(sale);
 
   }
@@ -118,7 +118,7 @@ public class SaleServiceImpl implements IsaleService {
       Recipe recipe = item.getRecipe();
       price += recipe.getPrecioVenta();
     }
-    sale.setAmount(price);
+    sale.setPrice(price);
 
     saleRepository.save(sale);
 
@@ -132,7 +132,7 @@ public class SaleServiceImpl implements IsaleService {
       Recipe recipe = item.getRecipe();
       price += recipe.getPrecioVenta();
     }
-    sale.setAmount(price);
+    sale.setPrice(price);
 
     saleRepository.save(sale);
 
