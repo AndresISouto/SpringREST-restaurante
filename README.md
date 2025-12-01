@@ -161,3 +161,35 @@ GET all Sales
 GET a sale with a certain id
 
     http://localhost:8080/api/v1/sales/{id}
+
+DELETE a sale with a certain id
+
+    http://localhost:8080/api/v1/sales/{id}
+
+POST create a sale
+
+    http://localhost:8080/api/v1/sales
+    {
+     "recipes":[
+        {
+          "recipe_id":long,
+          "amount":integer
+        },
+        {
+          "recipe_id":long,
+          "amount":integer
+        }
+      ]
+    }
+
+POST add recipe to sale
+
+    http://localhost:8080/api/v1/sales/{saleId}/recipes/{recipeId}
+
+DELETE recipe from sale
+
+    http://localhost:8080/api/v1/sales/{saleId}/recipes/{recipeId}
+
+POST pay sale
+
+    http://localhost:8080/api/v1/sales/{saleId}
