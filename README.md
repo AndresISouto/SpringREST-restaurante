@@ -28,18 +28,17 @@ POST a new recipe
       "steps": string,
       "ingredients":[
         {
-         "ingredien_id":long,
+         "ingredient_id":long,
          "unit":unit,
          "amount":double
         },
         {
-
-"ingredien_id":long,
-"unit":unit,
-"amount":double
-}
-]
-}
+          "ingredient_id":long,
+          "unit":unit,
+          "amount":double
+        }
+      ]
+    }
 
 PUT an updated recipe
 
