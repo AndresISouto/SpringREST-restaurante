@@ -23,6 +23,8 @@ public interface RecipeMapper {
   @Mapping(target = "name", source = "ingredient.name") // Jump from Link -> Ingredient -> Name
   @Mapping(target = "amount", source = "amount") // Directly from Link
   @Mapping(target = "unit", source = "unit") // Directly from Link (Enums map to String auto)
+  @Mapping(target = "ingredient_id", source = "ingredient.ingredient_id") // Directly from Link (Enums map to String
+                                                                          // auto)
   IngredientResponseDTO toIngredientDto(Recipe_Ingredient recipeIngredient);
 
   @Mapping(target = "ingredients", ignore = true)
