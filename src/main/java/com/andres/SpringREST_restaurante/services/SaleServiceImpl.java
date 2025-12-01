@@ -63,12 +63,17 @@ public class SaleServiceImpl implements IsaleService {
     Sale sale = new Sale();
     sale.setState(State.UNPAID);
     sale.setEmmisionDate(LocalDate.now());
+
     Double price = 0.0;
 
     for (RecipeSaleDTO item : dto.recipes()) {
       Recipe recipe = recipeServiceImpl.getEntityById(item.recipe_id());
       price += recipe.getPrecioVenta();
+      Sale_Recipe sr = new Sale_Recipe(sale, recipe, item.amount());
+      sale.addRecipe(sr);
     }
+
+    sale.setAmount(price);
 
     saleRepository.save(sale);
 
