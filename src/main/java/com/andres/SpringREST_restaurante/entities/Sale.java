@@ -29,7 +29,7 @@ public class Sale {
   @Enumerated(EnumType.STRING)
   private State state;
   @Column(nullable = false)
-  private Double amount;
+  private Double price;
 
   @OneToMany(mappedBy = "sale", cascade = CascadeType.ALL, orphanRemoval = true)
   private Set<Sale_Recipe> recipes = new HashSet<>();
@@ -58,12 +58,12 @@ public class Sale {
     this.state = state;
   }
 
-  public Double getAmount() {
-    return amount;
+  public Double getPrice() {
+    return price;
   }
 
-  public void setAmount(Double amount) {
-    this.amount = amount;
+  public void setPrice(Double price) {
+    this.price = price;
   }
 
   public Set<Sale_Recipe> getRecipes() {
@@ -77,18 +77,18 @@ public class Sale {
   public Sale() {
   }
 
-  public Sale(Long sale_id, LocalDate emmisionDate, State state, Double amount, Set<Sale_Recipe> recipes) {
+  public Sale(Long sale_id, LocalDate emmisionDate, State state, Double price, Set<Sale_Recipe> recipes) {
     this.sale_id = sale_id;
     this.emmisionDate = emmisionDate;
     this.state = state;
-    this.amount = amount;
+    this.price = price;
     this.recipes = recipes;
   }
 
-  public Sale(LocalDate emmisionDate, State state, Double amount) {
+  public Sale(LocalDate emmisionDate, State state, Double price) {
     this.emmisionDate = emmisionDate;
     this.state = state;
-    this.amount = amount;
+    this.price = price;
   }
 
   public void addRecipe(Sale_Recipe sr) {
