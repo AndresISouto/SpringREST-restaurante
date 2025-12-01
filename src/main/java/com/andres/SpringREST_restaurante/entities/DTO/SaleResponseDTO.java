@@ -8,6 +8,6 @@ import com.andres.SpringREST_restaurante.Enums.State;
 public record SaleResponseDTO(
     LocalDate emmisionDate,
     State state,
-    Double amount,
+    Double price,
     List<RecipeSaleDTO> recipes) {
 }
