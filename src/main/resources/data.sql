@@ -198,7 +198,7 @@ INSERT INTO reviews (recipe_id, body) VALUES
 -- Recipe 20: House Salad (Side) (ID 20)
 (20, 'A simple, fresh side salad. Nothing fancy, but the vinaigrette was light and flavorful.');
 
-INSERT INTO sales (emmision_date, state, amount) VALUES
+INSERT INTO sales (emmision_date, state, price) VALUES
 -- Recent Sales (PAID)
 (CURRENT_DATE(), 'PAID', 45.75),
 (CURRENT_DATE(), 'PAID', 12.99),
