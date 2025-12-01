@@ -16,6 +16,8 @@ import com.andres.SpringREST_restaurante.entities.DTO.SaleRequestDTO;
 import com.andres.SpringREST_restaurante.entities.DTO.SaleResponseDTO;
 import com.andres.SpringREST_restaurante.services.SaleServiceImpl;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/api")
 public class SaleController {
@@ -45,7 +47,7 @@ public class SaleController {
   }
 
   @PostMapping("/v1/sales")
-  public ResponseEntity<SaleResponseDTO> create(@RequestBody SaleRequestDTO req) {
+  public ResponseEntity<SaleResponseDTO> create(@RequestBody @Valid SaleRequestDTO req) {
     SaleResponseDTO response = saleService.create(req);
     return ResponseEntity.ok(response);
   }
