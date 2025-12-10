@@ -23,7 +23,6 @@ public class Recipe_Ingredient {
   private Recipe recipe;
   @ManyToOne
   @JoinColumn(name = "ingredient_id", nullable = false)
-
   private Ingredient ingredient;
   private Double amount;
   @Enumerated(EnumType.STRING)
