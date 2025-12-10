@@ -20,7 +20,6 @@ public interface RecipeMapper {
   @Mapping(target = "amount", source = "amount")
   @Mapping(target = "unit", source = "unit")
   @Mapping(target = "ingredient_id", source = "ingredient.ingredient_id")
-
   IngredientResponseDTO toIngredientDto(Recipe_Ingredient recipeIngredient);
 
   @Mapping(target = "ingredients", ignore = true)
