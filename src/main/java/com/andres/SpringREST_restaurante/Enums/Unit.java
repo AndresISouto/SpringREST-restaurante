@@ -5,7 +5,7 @@ public enum Unit {
   G(UnitCategory.MASS, 0.001),
 
   L(UnitCategory.VOLUME, 1.0),
-  ML(UnitCategory.MASS, 0.001);
+  ML(UnitCategory.VOLUME, 0.001);
 
   private final UnitCategory category;
   private final Double conversionFactor;
