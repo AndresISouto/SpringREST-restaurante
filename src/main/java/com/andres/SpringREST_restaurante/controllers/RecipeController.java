@@ -69,6 +69,12 @@ public class RecipeController {
     return ResponseEntity.ok(response);
   }
 
+  @PostMapping("/v1/recipes/{id}/reviews")
+  public ResponseEntity<ReviewDTO> addReview(@PathVariable Long id, @Valid @RequestBody ReviewDTO dto) {
+    ReviewDTO response = recipeService.addReview(id, dto);
+    return ResponseEntity.ok(response);
+  }
+
   @GetMapping("/v1/recipes/{id}/ingredients")
   public ResponseEntity<List<IngredientResponseDTO>> getIngredientsById(@PathVariable Long id) {
     List<IngredientResponseDTO> response = recipeService.getIngredientsById(id);
