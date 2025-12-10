@@ -85,7 +85,8 @@ public class RecipeServiceImpl implements IrecipeService {
       Ingredient ingredient = ingredientService.getEntityById(recipeIngredientDTO.ingredient_id());
 
       if (ingredient.getInventory().getUnit().getCategory() != recipeIngredientDTO.unit().getCategory()) {
-        throw new IllegalArgumentException("units need to be of the same category");
+        throw new IllegalArgumentException(
+            "units need to be of the same category for ingredient with id: " + recipeIngredientDTO.ingredient_id());
       }
 
       Recipe_Ingredient recipeIngredient = new Recipe_Ingredient(recipe, ingredient, recipeIngredientDTO.amount(),
@@ -145,6 +146,17 @@ public class RecipeServiceImpl implements IrecipeService {
         .toList();
 
     return response;
+  }
+
+  public ReviewDTO addReview(Long recipeId, ReviewDTO dto) {
+    Review review = reviewMapper.toEntity(dto);
+    Recipe recipe = recipeRepository.findById(recipeId)
+        .orElseThrow(() -> new NoSuchElementException("no existe receta con ese id"));
+
+    recipe.addReview(review);
+    recipeRepository.save(recipe);
+
+    return dto;
   }
 
   @Override
