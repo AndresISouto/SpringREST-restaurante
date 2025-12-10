@@ -141,4 +141,9 @@ public class Recipe {
     recipeIngredient.setRecipe(this);
   }
 
+  public void addReview(Review review) {
+    reviews.add(review);
+    review.setRecipe(this);
+  }
+
 }
