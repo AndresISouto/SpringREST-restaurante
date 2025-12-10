@@ -67,6 +67,14 @@ GET reviews of a recipe
 
     http://localhost:8080/api/v1/recipes/{id}/reviews
 
+POST a new review for a recipe
+
+    http://localhost:8080/api/v1/recipes/{id}/reviews
+
+    {
+      "body": string
+    }
+
 GET ingredients of a recipe
 
     http://localhost:8080/api/v1/recipes/{id}/ingredients
