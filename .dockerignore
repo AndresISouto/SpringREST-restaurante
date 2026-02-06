@@ -1,0 +1,26 @@
+# Ignore build outputs
+target/
+build/
+out/
+# .env
+.env
+
+# Ignore IDE settings
+.idea/
+.vscode/
+*.iml
+*.swp
+
+# Ignore Docker files themselves
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Ignore version control and logs
+.git
+.gitignore
+*.log
+
+# Ignore OS-specific junk
+.DS_Store
+Thumbs.db
